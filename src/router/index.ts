@@ -20,7 +20,7 @@ router.beforeEach(async (to, from, next) => {
   if (to.name === 'login') {
     next()
   } else {
-    if (!getToken || !userName) {
+    if (!getToken() || !userName) {
       next({ name: 'login' })
     } else if (!store.state.userId) {
       try {
