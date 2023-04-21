@@ -4,9 +4,9 @@ module.exports = {
   apps: [
     {
       // 应用程序名称
-      name: 'yyq-note',
+      name: 'note',
       // 执行文件
-      script: 'index.js',
+      script: 'index.ts',
       // 应用程序所在的目录
       cwd: './',
       // 传递给脚本的参数
