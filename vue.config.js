@@ -17,7 +17,7 @@ module.exports = {
   },
   devServer: {
     proxy: {
-      '/note': {
+      '/noteapi': {
         target: baseUrl,
         changeOrigin: true
       }

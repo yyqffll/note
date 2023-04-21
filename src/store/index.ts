@@ -36,7 +36,7 @@ export default createStore({
     login({ commit }, { userName, userPwd }) {
       return new Promise((resolve, reject) => {
         request({
-          url: '/note/user/login',
+          url: '/noteapi/user/login',
           data: {
             userName,
             userPwd: encrypt(userPwd)
@@ -57,7 +57,7 @@ export default createStore({
     getUserInfo({ commit }, { userName }) {
       return new Promise((resolve, reject) => {
         request({
-          url: '/note/user/getUserInfo',
+          url: '/noteapi/user/getUserInfo',
           data: {
             userName
           }

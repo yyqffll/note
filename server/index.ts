@@ -5,7 +5,7 @@ import userApi from './mongodb/schema/users/userApi'
 const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use('/note', userApi)
+app.use('/noteapi', userApi)
 
 const server = require('http').createServer(app)
 
