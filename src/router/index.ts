@@ -8,6 +8,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'login',
     component: () => import('../views/login.vue'),
   },
+  {
+    path: '/home',
+    name: 'home',
+    component: () => import('../views/home.vue'),
+  },
 ];
 
 const router = createRouter({
@@ -16,6 +21,8 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
+  const theme = getLocalStorage('theme')
+  store.commit('setTheme', theme ? theme : 'light')
   const userName = getLocalStorage('userName')
   if (to.name === 'login') {
     next()

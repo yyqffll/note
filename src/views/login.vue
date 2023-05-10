@@ -1,7 +1,7 @@
 <template>
   <div id="login-page">
     <div id="content">
-      <Avatar :avatarImg="avatarImg" />
+      <Avatar ref="avatar" :avatarImg="avatarImg" />
       <Form ref="form" hide-required-mark :model="model" :rules="rules">
         <Row>
           <Col span="24">
@@ -23,16 +23,21 @@
   </div>
 </template>
 
-<script setup>
+<script setup name="login">
 import Avatar from '@/components/Avatar'
-import avatarImg from '../assets/img.png'
+import avatarImg from '../assets/images/avatar.png'
+
 import { ref, reactive, getCurrentInstance } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+
+import { debounce } from '@/libs/utils'
+
 const { proxy } = getCurrentInstance()
 const store = useStore()
 const router = useRouter()
-const form = ref(null)
+const avatar = ref()
+const form = ref()
 const model = reactive({
   userName: '',
   userPwd: ''
@@ -42,21 +47,20 @@ const rules = reactive({
   userPwd: [{ required: true, message: '不能为空', trigger: 'blur' }]
 })
 let btnLoading = ref(false)
-function handleLogin () {
-  btnLoading = true
+const handleLogin = debounce(() => {
+  btnLoading.value = true
   form.value.validate(vaild => {
-    console.log(vaild)
-    if (!vaild) return btnLoading = false
+    if (!vaild) return btnLoading.value = false
     store.dispatch('login', model).then(res => {
-      if (res.success) {
-        proxy.$Message.success({ content: res.msg })
-        router.replace('/home')
-      }
+      proxy.$Message.success({ content: res.msg })
+      router.replace('/home')
     }).catch(err => {
+      btnLoading.value = false
       proxy.$Message.error({ content: err })
+      avatar.value.hoverLikeFun()
     })
   })
-}
+})
 </script>
 
 <style lang="less" scoped>

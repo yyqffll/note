@@ -1,0 +1,26 @@
+:root {
+  --theme: #fff;
+  --theme-color: #1c1e21;
+  --navbar-box-shadow: rgba(0, 0, 0, 0.1);
+}
+
+@color-cursor: #25c2a0; // hover || 确认按钮
+@font-size-18: 18px;
+
+.ivu-switch {
+  display: flex;
+  align-items: center;
+  box-shadow: none !important;
+  border-color: unset;
+
+  /deep/.ivu-switch-inner {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  &:hover::before,
+  &:hover::after {
+    box-shadow: 0 0 2px 3px @color-cursor;
+  }
+}

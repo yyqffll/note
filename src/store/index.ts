@@ -8,6 +8,7 @@ import {
 } from '@/libs/utils'
 export default createStore({
   state: {
+    theme: '',
     token: getToken(),
     userId: '',
     userName: '',
@@ -15,6 +16,19 @@ export default createStore({
     userData: null,
   },
   mutations: {
+    setTheme(state, theme) {
+      state.theme = theme
+      setLocalStorage('theme', theme)
+      if (theme === 'light') {
+        document.documentElement.style.setProperty('--theme', '#fff')
+        document.documentElement.style.setProperty('--theme-color', '#1c1e21')
+        document.documentElement.style.setProperty('--navbar-box-shadow', 'rgba(0, 0, 0, 0.1)')
+      } else {
+        document.documentElement.style.setProperty('--theme', '#000')
+        document.documentElement.style.setProperty('--theme-color', '#fff')
+        document.documentElement.style.setProperty('--navbar-box-shadow', '#4d4d4d')
+      }
+    },
     setToken(state, token) {
       state.token = token
       setToken(token)
@@ -71,7 +85,7 @@ export default createStore({
           reject(err.msg)
         })
       })
-    }
+    },
   },
   modules: {
   }

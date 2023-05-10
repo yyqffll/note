@@ -4,18 +4,13 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'App',
-}
+<script setup name="app">
 </script>
 
 <style lang="less">
 html,
-body {
+body,
+#app {
   height: 100%;
-  #app {
-    height: 100%;
-  }
 }
 </style>

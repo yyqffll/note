@@ -1,9 +1,9 @@
 <template>
-  <img id="avatar" :src="avatarImg" />
+  <img ref="img" id="avatar" :src="avatarImg" />
 </template>
 
-<script setup>
-import { defineProps } from 'vue'
+<script setup name="Avatar">
+import { defineProps, ref, defineExpose } from 'vue'
 defineProps({
   avatarSize: {
     default: '64px',
@@ -13,7 +13,14 @@ defineProps({
     default: null
   }
 })
-
+const img = ref()
+const hoverLikeFun = async () => {
+  img.value.classList.add('avatar-hover')
+  setTimeout(() => { img.value.classList.remove('avatar-hover') }, 300)
+}
+defineExpose({
+  hoverLikeFun
+});
 </script>
 
 <style lang="less" scoped>
@@ -42,11 +49,14 @@ defineProps({
       #aebcd3 99%,
       transparent 100%
     )
-    no-repeat top / calc(100% / var(--normal)) calc(100% + 20px);
+    no-repeat top ~'/' calc(100% / var(--normal)) calc(100% + 20px);
   mask: linear-gradient(#000 0 0) no-repeat center calc(1px - var(--offset)) ~'/'
       calc(100% / var(--normal) - 11px) 50%,
     radial-gradient(circle closest-side, #000 99%, transparent) no-repeat top ~'/'
       calc(100% / var(--normal)) calc(100% + 20px);
+}
+.avatar-hover {
+  --normal: var(--scale) !important;
 }
 #avatar:hover {
   --normal: var(--scale);

@@ -79,3 +79,27 @@ export const decrypt = (encryptData: string): string => {
   })
   return CryptoJS.enc.Utf8.stringify(decrypt).toString()
 }
+
+export const debounce = (fun: () => void, delay = 500): () => void => {
+  let timer: any
+  return function () {
+    if (timer) clearTimeout(timer)
+    const immediately = !timer
+    timer = setTimeout(() => {
+      timer = null
+    }, delay)
+    immediately && fun()
+  }
+}
+
+export const throttle = (fun: () => void, delay = 500): () => void => {
+  let timer: any
+  return function () {
+    if (!timer) {
+      timer = setTimeout(() => {
+        fun()
+        timer = null
+      }, delay)
+    }
+  }
+}

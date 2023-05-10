@@ -4,9 +4,7 @@ export function request(config: AxiosRequestConfig<any>) {
     method: 'POST'
   })
   instance.interceptors.response.use((res: any) => {
-    const {
-      data
-    } = res
+    const { data } = res
     if (data.success === false) {
       return Promise.reject(data)
     } else {

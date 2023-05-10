@@ -4,7 +4,7 @@ import router from './router';
 import store from './store';
 
 import 'view-ui-plus/dist/styles/viewuiplus.css'
-import { Button, Input, Form, FormItem, Row, Col, Message } from 'view-ui-plus'
+import { Button, Input, Form, FormItem, Row, Col, Message, Switch } from 'view-ui-plus'
 
 const app = createApp(App)
 
@@ -20,4 +20,5 @@ app
   .component('Row', Row)
   .component('Col', Col)
   .component('Message', Message)
+  .component('Switch', Switch)
   .mount('#app');
